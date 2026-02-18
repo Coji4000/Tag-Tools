@@ -8,7 +8,7 @@ first column (text before the first comma) into a cleaned output file.
 
 Set-StrictMode -Version Latest
 
-$workspaceRoot = Split-Path -Parent $PSScriptRoot
+$workspaceRoot = Get-Location
 $repoPath = Join-Path $workspaceRoot 'tag-list-processor'
 
 function Prompt-YesNo($msg) {
