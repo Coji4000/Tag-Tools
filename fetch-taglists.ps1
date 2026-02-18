@@ -79,10 +79,12 @@ Write-Host "Found merged file: $($mergedFile.FullName)"
 
 # Process the merged file: keep text before first comma on each non-empty line
 $lines = Get-Content -LiteralPath $mergedFile.FullName -ErrorAction Stop
-$clean = $lines | ForEach-Object {
+$oneCol = $lines | ForEach-Object {
     if ([string]::IsNullOrWhiteSpace($_)) { return }
     ($_.Split(','))[0]
 } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+
+$clean = $oneCol | ForEach-Object { $_ -replace '_', ' ' }
 
 $outFile = Join-Path $repoPath 'merged_tags_cleaned.txt'
 $clean | Set-Content -LiteralPath $outFile -Encoding UTF8
