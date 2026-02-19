@@ -1,34 +1,33 @@
-# tag shuffler
+## Tag Tools
 
 A pair of scripts to aid in retrieving a current list of tags available on e621 and Danbooru and Shuffling the results into a prompt format.
 
-fetch-Taglists.ps1 will install https://github.com/DraconicDragon/danbooru-e621-tag-list-processor and use it to get the taglists, store Krita compatible autofill csvs.
 
-fetch-Taglists.ps1 then creates it's own file that is a prune list of just the tag names.
-
-
-shuffle-Taglist.ps1 opens a WPF UI allowing a User to select a taglist, provide a few configuration settings, and click execute to retrieve a random prompt in the length specified.
-
-
-fetch-Taglists.ps1 requires git to be installed. 
-
-
-shuffle-Taglists.ps1 can be used with any list as long as it is a list of strings like
+**shuffleTaglists.ps1**
+ - Opens a WPF UI
+ - Allows selection of a csv or txt input list
+ - Range options allow targetting smaller chunks of the file
+ - Prompt length specifies the number of items to retrieve
+ - Pressing Execute retrieves the items and displays them
+ - Easy to copy and paste into whatever may be asking you for prompts
+ - Sample input format included below
 
 
-pink,
+**fetch-Taglists.ps1** 
+ - Requires git
+ - Installs https://github.com/DraconicDragon/danbooru-e621-tag-list-processor
+ - Runs the processor to pull current taglists from Danbooru and e621
+ - Further processes the output from the processor into the format shown below
 
-red,
 
-!(4000,
-
-a b c d,
-
-Frank,
-
-0_0,
-
-We've been trying to reach you,
-
+```
+pink
+red
+!(4000
+a b c d
+Frank
+0_0
+We've been trying to reach you
 ...
+```
 
