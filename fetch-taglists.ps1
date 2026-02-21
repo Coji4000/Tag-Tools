@@ -77,10 +77,14 @@ if (-not $mergedFile) {
 
 Write-Host "Found merged file: $($mergedFile.FullName)"
 
-# Process the merged file: keep text before first comma on each non-empty line
+# Process the merged file: keep text before first comma on each non-empty line,
+# but only process lines that contain ",0,"
 $lines = Get-Content -LiteralPath $mergedFile.FullName -ErrorAction Stop
-$oneCol = $lines | ForEach-Object {
-    if ([string]::IsNullOrWhiteSpace($_)) { return }
+
+# Filter to lines containing ",0"
+$linesWithZero = $lines | Where-Object { -not [string]::IsNullOrWhiteSpace($_) -and ($_ -match ',0,') }
+
+$oneCol = $linesWithZero | ForEach-Object {
     ($_.Split(','))[0]
 } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
 
